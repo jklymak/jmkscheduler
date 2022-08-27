@@ -1,0 +1,73 @@
+title: Eos 314 Descriptive Physical Oceanography
+year: 2022
+first-day: 2022-09-07
+last-day:  2022-12-02
+dow: TWF
+special-days:
+  - title: Cruise-Day-1
+    date: 2022-09-24
+    type: field
+  - title: Cruise-Day-2
+    date: 2022-09-28
+    type: field
+  - title: National Day for Truth & Reconc.
+    date: 2022-09-30
+    type: holiday
+  - title: Reading Break
+    date: 2022-11-09
+    type: holiday
+  - title: Reading Break
+    date: 2022-11-10
+    type: holiday
+  - title: Remembrance Day
+    date: 2022-11-11
+    type: holiday
+  - title: Instructor away
+    date: 2022-09-20
+    type: cancelled
+  - title: Instructor away
+    date: 2022-09-21
+    type: cancelled
+  - title: Quiz 1
+    date: 2022-10-25
+    type: quiz
+subjects:
+  - title: Introduction
+    classes: 1
+  - title: Estuaries; Fluxes
+    reading: 0
+    assign: 7
+  - title: Properties of Seawater; Pressure
+    classes: 2
+    reading: 0
+    assign: 7
+  - title: Heat and Salt Budgets; Mixing
+    reading: 0
+    assign: 7
+  - title: Water Properties; T/S Diagrams
+    reading: 0
+    assign: 7
+  - title: Overturning Circulation
+    reading: 0
+    assign: 7
+  - title: Global warming and sea-level change
+    classes: 2
+    reading: 0
+    assign: 7
+  - title: Tide
+    reading: 0
+    assign: 7
+  - title: Wind-driven circulation
+    classes: 1
+  - title: Coriolis Force; Ekman Balance
+    reading: 0
+    assign: 7
+  - title: Geostrophic Bal.; Coastal Circ.
+    reading: 0
+    assign: 7
+  - title: Gyre Circulation and Sverdrup Balance
+    reading: 0
+    assign: 7
+  - title: Equatorial Circulation, Antarctic
+    classes: 1
+
