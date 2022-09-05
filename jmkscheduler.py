@@ -2,6 +2,7 @@
 Script to turn yaml into a schedule
 """
 from datetime import datetime, timedelta
+from colored import fg, bg, attr
 
 import yaml
 
@@ -23,6 +24,8 @@ assignments = []
 
 date = data['first-day']
 print(date)
+html = '<table>\n'
+html += '<tr><th>Date</th> <th>Type</th> <th>Activity</th> <th>Reading due</th> <th>Assignment Due</th>\n'
 while (data['last-day'] - date).total_seconds() >= 0:
     datestr = date.strftime('%a %d %b')
 
@@ -30,8 +33,22 @@ while (data['last-day'] - date).total_seconds() >= 0:
     for special in data['special-days']:
         if date == special['date']:
             title = special['title']
-            type = special['type']
-            print(f'{datestr}  {type.upper():10} {title}')
+            type = special['type'].upper()
+            if type == 'CANCELLED':
+                thecolor = 'sandy_brown'
+                csscolor = 'sandybrown'
+            elif type == 'QUIZ':
+                thecolor = 'orange_4a'
+                csscolor = 'lightsalmon'
+            elif type == 'HOLIDAY':
+                thecolor = 'pale_green_1b'
+                csscolor = 'lightgreen'
+            elif type == 'FIELD':
+                thecolor = 'cornflower_blue'
+                csscolor = 'cornflowerblue'
+            emp = ''
+            print(f'{bg(thecolor)} {datestr}  {type.upper():10}    {title:40} {emp:18} {bg("white")}')
+            html += f'<tr bgcolor={csscolor}> <td>{datestr}</td>  <td>{type.upper()}</td>  <td>{title}</td> <td></td> <td></td> </tr>\n'
             break
 
     # not a special day?  slot in next class.
@@ -56,8 +73,11 @@ while (data['last-day'] - date).total_seconds() >= 0:
 
                     if type == 'lecture':
                         type = ''
-                    print(f'{datestr}  {type:10} {subject_num:02d} {title:40} {reading:11} {assign}')
 
+                    thecolor = 'white' if subject_num % 2 else 'grey_82'
+                    print(f'{bg(thecolor)} {datestr}  {type:10} {subject_num:02d} {title:40} {reading:11} {assign:6} {bg("white")} ')
+                    thecolor = 'white' if subject_num % 2 else 'lightgrey'
+                    html += f'<tr bgcolor={thecolor}> <td> {datestr}</td> <td>{type:10}</td> <td>{subject_num:02d} {title:40}</td> <td> {reading:11}</td> <td> {assign:6}</td> </tr>\n'
                     # create an entry to assignments to track when this one is due.
                     assign = subject.get('assign', None)
                     if assign and subject['assigned']+1 == subject['classes']:
@@ -71,6 +91,8 @@ while (data['last-day'] - date).total_seconds() >= 0:
 
     date = date + timedelta(days=1)
 
+html += '</table>\n'
+
 print('Left over assignments:')
 for assignment in assignments:
     print(assignment)
@@ -82,3 +104,6 @@ for subject_num, subject in enumerate(subjects):
         print(subject)
 
 print()
+
+with open('example.html', 'w') as f:
+    f.write(html)
